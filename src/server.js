@@ -17,4 +17,4 @@ mongoose.connect( process.env.DB_URL , {
 app.use(express.json());
 app.use(routes);
 
-app.listen(8080);
+app.listen(process.env.PORT||8080);
