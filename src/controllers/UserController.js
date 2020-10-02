@@ -3,11 +3,15 @@ const User = require('../models/User')
 module.exports = {
 
     async getUser(req, res){
-        const { email } = req.query;
+        try{
+            const { email } = req.query;
 
-        const emails = await User.find({ email: email});
+            const emails = await User.find({ email: email});
 
-        return res.json(emails);
+            return res.status(200).json(emails);
+        }catch(err){
+            return res.status(400).json({error: err.message});
+        }   
     },
 
 
@@ -19,10 +23,10 @@ module.exports = {
             if (!user) {
             user = await User.create({ name, email, bithday, type });
             }
-            return res.json(user);
+            return res.status(200).json(user);
 
-        }catch(error){
-            console.log(error.message);
+        }catch(err){
+            return res.status(400).json({error: err.message})
     } 
         
 }
