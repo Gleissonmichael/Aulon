@@ -23,10 +23,10 @@ module.exports = {
             if (!user) {
             user = await User.create({ name, email, bithday, type });
             }
-            return res.json(user);
+            return res.status(200).json(user);
 
-        }catch(error){
-            console.log(error.message);
+        }catch(err){
+            return res.status(400).json({error: err.message})
     } 
         
 }
